@@ -61,12 +61,12 @@ func TestListEntries(t *testing.T) {
 		Offset:    5,
 	}
 
-	accounts, err := testQueries.ListEntries(context.Background(), arg)
+	entries, err := testQueries.ListEntries(context.Background(), arg)
 
 	require.NoError(t, err)
-	require.Len(t, accounts, 5)
+	require.Len(t, entries, 5)
 
-	for _, acc := range accounts {
-		require.NotEmpty(t, acc)
+	for _, entry := range entries {
+		require.NotEmpty(t, entry)
 	}
 }
