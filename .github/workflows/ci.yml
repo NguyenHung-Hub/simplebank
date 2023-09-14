@@ -4,43 +4,43 @@
 name: ci-test
 
 on:
-  push:
-    branches: ["master"]
-  pull_request:
-    branches: ["master"]
+    push:
+        branches: ["master"]
+    pull_request:
+        branches: ["master"]
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: 123456
-          POSTGRES_DB: simple_bank
-        ports:
-          - 5432:5432
-        options: >_
-          - health-cmd pq_isready
-          - health-interval 10s
-          - health-timeout 5s
-          - health-entries 5
-      steps:
-        - name: Set up Go
-          uses: actions/setup-go@v4
-          with:
-            go-version: "1.21"
-          id: go
-        - name: Check out code into the Go module directory
-          run: actions/check-out@v4
-        - name: Install golang-migrate
-          run: |
-            curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
-            sudo mv migrate.linux-amd64 /usr/bin/migrate
-            which migrate
-        - name: Run migrate
-          run: make migrateup
-        - name: Test
-          run: make test
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:12
+                env:
+                    POSTGRES_USER: root
+                    POSTGRES_PASSWORD: 123456
+                    POSTGRES_DB: simple_bank
+                ports:
+                    - 5432:5432
+                options: >-
+                    - health-cmd pq_isready
+                    - health-interval 10s
+                    - health-timeout 5s
+                    - health-entries 5
+            steps:
+                - name: Set up Go
+                  uses: actions/setup-go@v4
+                  with:
+                      go-version: "1.21"
+                  id: go
+                - name: Check out code into the Go module directory
+                  run: actions/check-out@v4
+                - name: Install golang-migrate
+                  run: |
+                      curl -L https://github.com/golang-migrate/migrate/releases/download/v4.16.2/migrate.linux-amd64.tar.gz | tar xvz
+                      sudo mv migrate.linux-amd64 /usr/bin/migrate
+                      which migrate
+                - name: Run migrate
+                  run: make migrateup
+                - name: Test
+                  run: make test
