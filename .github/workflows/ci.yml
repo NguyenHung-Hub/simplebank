@@ -26,7 +26,7 @@ jobs:
                     --health-cmd pq_isready
                     --health-interval 10s
                     --health-timeout 5s
-                    --health-entries 5
+                    --health-retries 5
         steps:
             - name: Set up Go
               uses: actions/setup-go@v4
