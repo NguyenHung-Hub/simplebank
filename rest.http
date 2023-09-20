@@ -18,3 +18,14 @@ GET {{base}}/accounts/3
 ###
 
 GET {{base}}/accounts?page_id=1&page_size=5
+
+### 
+POST  {{base}}/transfers
+Content-Type: application/json
+
+{
+    "from_account_id":1,
+    "to_account_id":2,
+    "amount":10,
+    "currency":"USD"
+}
