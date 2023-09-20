@@ -1,0 +1,20 @@
+@base = http://localhost:3001
+
+
+###
+POST {{base}}/accounts
+Content-Type: application/json
+
+{
+    "owner":"hung nguyen",
+    "currency":"USD"
+}
+
+
+###
+
+GET {{base}}/accounts/3
+
+###
+
+GET {{base}}/accounts?page_id=1&page_size=5
