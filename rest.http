@@ -40,3 +40,13 @@ Content-Type: application/json
     "email":"hungnguyen2@gmail.com",
     "password":"123123"
 }
+
+
+###
+POST {{base}}/users/login
+Content-Type: application/json
+
+{
+    "username":"hundfgg2",
+    "password":"123s123"
+}
