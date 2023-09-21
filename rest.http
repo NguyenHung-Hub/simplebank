@@ -6,7 +6,7 @@ POST {{base}}/accounts
 Content-Type: application/json
 
 {
-    "owner":"hung nguyen",
+    "owner":"adjyth",
     "currency":"USD"
 }
 
@@ -28,4 +28,15 @@ Content-Type: application/json
     "to_account_id":2,
     "amount":10,
     "currency":"CADs"
+}
+
+### 
+POST  {{base}}/users
+Content-Type: application/json
+
+{
+    "username":"hung2",
+    "full_name":"Hung Nguyen",
+    "email":"hungnguyen2@gmail.com",
+    "password":"123123"
 }
