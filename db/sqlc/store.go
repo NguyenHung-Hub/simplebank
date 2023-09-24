@@ -32,7 +32,7 @@ func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) erro
 	err = fn(q)
 	if err != nil {
 		if rbErr := tx.Rollback(); rbErr != nil {
-			return fmt.Errorf("transaction error %s, rollback error %s", err, rbErr)
+			return fmt.Errorf("transaction error %v, rollback error %v", err, rbErr)
 		}
 
 		return err
@@ -117,9 +117,9 @@ func addMoney(ctx context.Context, q *Queries, accountId1, amount1, accountId2, 
 		Amount: amount2,
 	})
 
-	if err != nil {
-		return
-	}
+	// if err != nil {
+	// 	return
+	// }
 
 	return
 }
