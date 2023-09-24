@@ -3,10 +3,11 @@
 
 ###
 POST {{base}}/accounts
+Authorization: Bearer v2.local.gAiKgT5SwU_D_UY8N1oVeu9T2p4B1LT7leKfHLvsDxZiCwbXJtle271wtOfvn45sW-9bpQS-erE1bC7cRA5uqPrmN9XtHurcuIgxIVRhjlrwH22Zrq5054O-txMxv3KzEZWpUS65TL1xqJvqcVUE5eIYRhR-zJ5-q9HrH-nhGHqHTHnbywaw7tqbQVgHw7Mh9e7FeK60-l3kqUs78iRi0-l1p0XEtvj_uOuvMBL9F8DHeMBrd4USHZouYCqPv8V0E-GUb6KYi0Dh.bnVsbA
 Content-Type: application/json
 
 {
-    "owner":"adjyth",
+    "owner":"hung2",
     "currency":"USD"
 }
 
@@ -18,16 +19,18 @@ GET {{base}}/accounts/3
 ###
 
 GET {{base}}/accounts?page_id=1&page_size=5
+Authorization: Bearer v2.local.F3WF_-EWutChSr4pj_K5iaJ5r9RXTCKp_IupnQEZ4wUeWNHHGXCCWc_HLIWznFaj4SKYLKjgD3xv6oNdUyPyBZB6W9IywpkroBGza5iLo1miIspuB7jDt7Y4TvM1uSq8o_UfI1eVo37cwvoMNpA7M3RdmB3fqVPkEVvUzG04NkFDaZvmzyxNQHhVtuJ60xvBqyGnyAj0crjlxuQnoynYRnFLrLqjZWdjfWplAsd5SiCS8Hvf6rU0A3yYZYqlx2gD2adtTn5SEp4r.bnVsbA
 
 ### 
 POST  {{base}}/transfers
+Authorization: Bearer v2.local.F3WF_-EWutChSr4pj_K5iaJ5r9RXTCKp_IupnQEZ4wUeWNHHGXCCWc_HLIWznFaj4SKYLKjgD3xv6oNdUyPyBZB6W9IywpkroBGza5iLo1miIspuB7jDt7Y4TvM1uSq8o_UfI1eVo37cwvoMNpA7M3RdmB3fqVPkEVvUzG04NkFDaZvmzyxNQHhVtuJ60xvBqyGnyAj0crjlxuQnoynYRnFLrLqjZWdjfWplAsd5SiCS8Hvf6rU0A3yYZYqlx2gD2adtTn5SEp4r.bnVsbA
 Content-Type: application/json
 
 {
-    "from_account_id":1,
-    "to_account_id":2,
-    "amount":10,
-    "currency":"CADs"
+    "from_account_id":20,
+    "to_account_id":138,
+    "amount":100,
+    "currency":"USD"
 }
 
 ### 
@@ -47,6 +50,6 @@ POST {{base}}/users/login
 Content-Type: application/json
 
 {
-    "username":"hundfgg2",
-    "password":"123s123"
+    "username":"hung2",
+    "password":"123123"
 }
