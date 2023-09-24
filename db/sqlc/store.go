@@ -6,19 +6,24 @@ import (
 	"fmt"
 )
 
-type Store struct {
+type Store interface {
+	Querier
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+}
+
+type SQLStore struct {
 	*Queries
 	db *sql.DB
 }
 
-func NewStore(db *sql.DB) *Store {
-	return &Store{
+func NewStore(db *sql.DB) Store {
+	return &SQLStore{
 		db:      db,
 		Queries: New(db),
 	}
 }
 
-func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
+func (store *SQLStore) execTx(ctx context.Context, fn func(*Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -27,7 +32,7 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	err = fn(q)
 	if err != nil {
 		if rbErr := tx.Rollback(); rbErr != nil {
-			return fmt.Errorf("transaction error %s, rollback error %s", err, rbErr)
+			return fmt.Errorf("transaction error %v, rollback error %v", err, rbErr)
 		}
 
 		return err
@@ -49,7 +54,7 @@ type TransferTxResult struct {
 	ToEntry     Entry    `json:"to_entry"`
 }
 
-func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
+func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 
 	var result TransferTxResult
 
@@ -86,17 +91,13 @@ func (store *Store) TransferTx(ctx context.Context, arg TransferTxParams) (Trans
 
 		if arg.FromAccountId < arg.ToAccountId {
 			result.FromAccount, result.ToAccount, err = addMoney(ctx, q, arg.FromAccountId, -arg.Amount, arg.ToAccountId, arg.Amount)
-			if err != nil {
-				return err
-			}
+
 		} else {
 			result.ToAccount, result.FromAccount, err = addMoney(ctx, q, arg.ToAccountId, arg.Amount, arg.FromAccountId, -arg.Amount)
-			if err != nil {
-				return err
-			}
+
 		}
 
-		return nil
+		return err
 	})
 
 	return result, err
@@ -116,9 +117,9 @@ func addMoney(ctx context.Context, q *Queries, accountId1, amount1, accountId2, 
 		Amount: amount2,
 	})
 
-	if err != nil {
-		return
-	}
+	// if err != nil {
+	// 	return
+	// }
 
 	return
 }
