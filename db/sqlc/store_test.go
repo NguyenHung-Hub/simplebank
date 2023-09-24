@@ -105,9 +105,9 @@ func TestTransferTx(t *testing.T) {
 	}
 
 	//check the final updated account
-	updateAccount1, err := testQueries.GetAccount(context.Background(), account1.ID)
+	updateAccount1, err := store.GetAccount(context.Background(), account1.ID)
 	require.NoError(t, err)
-	updateAccount2, err := testQueries.GetAccount(context.Background(), account2.ID)
+	updateAccount2, err := store.GetAccount(context.Background(), account2.ID)
 	require.NoError(t, err)
 
 	fmt.Println(">> after: ", updateAccount1.Balance, updateAccount2.Balance)
@@ -156,9 +156,9 @@ func TestTransferTxDeadlock(t *testing.T) {
 	}
 
 	//check the final updated account
-	updateAccount1, err := testQueries.GetAccount(context.Background(), account1.ID)
+	updateAccount1, err := store.GetAccount(context.Background(), account1.ID)
 	require.NoError(t, err)
-	updateAccount2, err := testQueries.GetAccount(context.Background(), account2.ID)
+	updateAccount2, err := store.GetAccount(context.Background(), account2.ID)
 	require.NoError(t, err)
 
 	fmt.Println(">> after: ", updateAccount1.Balance, updateAccount2.Balance)
